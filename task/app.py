@@ -20,25 +20,12 @@ def main():
     # 1. Create UserClient
     # 2. Create OpenAIClient with all tools (WebSearchTool, GetUserByIdTool, SearchUsersTool, CreateUserTool, UpdateUserTool, DeleteUserTool)
     # 3. Create Conversation and add there first System message with SYSTEM_PROMPT (you need to write it in task.prompts#SYSTEM_PROMPT)
-
-    print("Type your question or 'exit' to quit.")
-    print("Sample:")
-    print("Add Andrej Karpathy as a new user")
-
-    while True:
-        user_input = input("> ").strip()
-
-        if user_input.lower() == "exit":
-            print("Exiting the chat. Goodbye!")
-            break
-        #TODO:
-        # 1. Add User message to Conversation
-        # 2. Call OpenAIClient with conversation history
-        # 3. Add Assistant message to Conversation and print its content
-
-
-        print("=" * 100)
-        print()
+    # 4. Run infinite loop and in loop and:
+    #    - get user input from terminal (`input("> ").strip()`)
+    #    - Add User message to Conversation
+    #    - Call OpenAIClient with conversation history
+    #    - Add Assistant message to Conversation and print its content
+    raise NotImplementedError()
 
 
 main()
