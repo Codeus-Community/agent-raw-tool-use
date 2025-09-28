@@ -8,19 +8,23 @@ class CreateUserTool(BaseUserServiceTool):
 
     @property
     def name(self) -> str:
-        return "add_user"
+        #TODO: Provide tool name as `add_user`
+        raise NotImplementedError()
 
     @property
     def description(self) -> str:
-        return "Adds new user"
+        #TODO: Provide description of this tool
+        raise NotImplementedError()
 
     @property
     def input_schema(self) -> dict[str, Any]:
-        return UserCreate.model_json_schema()
+        #TODO: Provide tool params Schema. To do that you can create json schema from UserCreate pydentic model ` UserCreate.model_json_schema()`
+        raise NotImplementedError()
 
     def execute(self, arguments: dict[str, Any]) -> str:
-        try:
-            user = UserCreate.model_validate(arguments)
-            return self._user_client.add_user(user)
-        except Exception as e:
-            return f"Error while creating a new user: {str(e)}"
+        #TODO:
+        # 1. Validate arguments with `UserCreate.model_validate`
+        # 2. Call user_client add user and return its results
+        # 3. Optional: You can wrap it with `try-except` and return error as string `f"Error while creating a new user: {str(e)}"`
+        raise NotImplementedError()
+

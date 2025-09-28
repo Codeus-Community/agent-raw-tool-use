@@ -7,28 +7,23 @@ class GetUserByIdTool(BaseUserServiceTool):
 
     @property
     def name(self) -> str:
-        return "get_user_by_id"
+        #TODO: Provide tool name as `get_user_by_id`
+        raise NotImplementedError()
 
     @property
     def description(self) -> str:
-        return "Provides full user information"
+        #TODO: Provide description of this tool
+        raise NotImplementedError()
 
     @property
     def input_schema(self) -> dict[str, Any]:
-        return {
-            "type": "object",
-            "properties": {
-                "id": {
-                    "type": "number",
-                    "description": "User ID"
-                }
-            },
-            "required": ["id"]
-        }
+        #TODO:
+        # Provide tool params Schema. This tool applies user `id` (number) as a parameter and it is required
+        raise NotImplementedError()
 
     def execute(self, arguments: dict[str, Any]) -> str:
-        try:
-            id = int(arguments["id"])
-            return self._user_client.get_user(id)
-        except Exception as e:
-            return f"Error while retrieving user by id: {str(e)}"
+        #TODO:
+        # 1. Get int `id` from arguments
+        # 2. Call user_client get_user and return its results
+        # 3. Optional: You can wrap it with `try-except` and return error as string `f"Error while retrieving user by id: {str(e)}"`
+        raise NotImplementedError()

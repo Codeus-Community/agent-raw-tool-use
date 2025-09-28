@@ -156,3 +156,6 @@ Final response:
   ]
 }
 ```
+
+## Additional task:
+Implement Anthropic client and create an Agent that will use Anthropic orchestration model

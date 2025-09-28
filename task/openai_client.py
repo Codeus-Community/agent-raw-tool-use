@@ -49,26 +49,20 @@ class OpenAIClient:
                 print("RESPONSE:", json.dumps(choice, indent=2))
                 print("-" * 100)
 
-                message_data = choice.get("message", {})
-                content = message_data.get("content")
-                tool_calls = message_data.get("tool_calls")
+                #TODO:
+                # 1. Get `message` from `choice` and assign to `message_data` variable
+                # 2. Get `content` from `message` and assign to `content` variable
+                # 3. Get `tool_calls` from `message` and assign to `tool_calls` variable
+                # 4. Create `ai_response` Message (with AI role, `content` and `tool_calls`)
+                # 5. If `choice` `finish_reason` is `tool_calls`:
+                #       Yes:
+                #           - append `ai_response` to `messages`
+                #           - call `_process_tool_calls` with `tool_calls` and assign result to `tool_messages` variable
+                #           - add `tool_messages` to `messages` (use `extend` method)
+                #           - make recursive call (return `get_completion` with `messages` and `print_request`)
+                #       No: return `ai_response` (final assistant response)
 
-                ai_response = Message(
-                    role=Role.AI,
-                    content=content,
-                    tool_calls=tool_calls
-                )
-
-                if choice.get("finish_reason") == "tool_calls":
-                    messages.append(ai_response)
-
-                    tool_messages = self._process_tool_calls(tool_calls)
-                    messages.extend(tool_messages)
-
-                    # Recursive call to get final response
-                    return self.get_completion(messages, print_request)
-
-                return ai_response
+                return None
             raise ValueError("No Choice has been present in the response")
         else:
             raise Exception(f"HTTP {response.status_code}: {response.text}")
@@ -77,27 +71,28 @@ class OpenAIClient:
         """Process tool calls and add results to messages."""
         tool_messages = []
         for tool_call in tool_calls:
-            tool_call_id = tool_call["id"]
-            function = tool_call["function"]
-            function_name = function["name"]
-            arguments = json.loads(function["arguments"])
-
-            tool_execution_result = self._call_tool(function_name, arguments)
-
-            tool_messages.append(Message(
-                role=Role.TOOL,
-                name=function_name,
-                tool_call_id=tool_call_id,
-                content=tool_execution_result
-            ))
-
-            print(f"FUNCTION '{function_name}'\n{tool_execution_result}\n{'-' * 50}")
-
+            #TODO:
+            # 1. Get `id` from `tool_call` and assign to `tool_call_id` variable
+            # 2. Get `function` from `tool_call` and assign to `function` variable
+            # 3. Get `name` from `function` and assign to `function_name` variable
+            # 4. Get `arguments` from `function` as json (json.loads) and assign to `arguments` variable
+            # 5. Call `_call_tool` with `function_name` and `arguments`, and assign to `tool_execution_result` variable
+            # 6. Append to `tool_messages` Message with:
+            #       - role=Role.TOOL
+            #       - name=function_name
+            #       - tool_call_id=tool_call_id
+            #       - content=tool_execution_result
+            # 7. print(f"FUNCTION '{function_name}'\n{tool_execution_result}\n{'-'*50}")
+            # 8. Return `tool_messages`
+            # -----
+            # FYI: It is important to provide `tool_call_id` in TOOL Message. By `tool_call_id` LLM make a  relation
+            #      between Assistant message `tool_calls[i][id]` and message in history.
+            #      In case if no Tool message presented in history (no message at all or with different tool_call_id),
+            #      then LLM with answer with Error (that not find tool message with specified id).
+            raise NotImplementedError()
         return tool_messages
 
     def _call_tool(self, function_name: str, arguments: dict[str, Any]) -> str:
-        tool = self._tools_dict.get(function_name)
-        if tool:
-            return tool.execute(arguments)
-
-        return f"Unknown function: {function_name}"
+        #TODO:
+        # Get tool from `__tools_dict`, id present then return executed result, otherwise return `f"Unknown function: {function_name}"`
+        raise NotImplementedError()

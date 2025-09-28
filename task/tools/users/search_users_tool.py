@@ -7,43 +7,27 @@ class SearchUsersTool(BaseUserServiceTool):
 
     @property
     def name(self) -> str:
-        return "search_users"
+        #TODO: Provide tool name as `search_users`
+        raise NotImplementedError()
 
     @property
     def description(self) -> str:
-        return "Searches users by name, surname, email, and gender"
+        #TODO: Provide description of this tool
+        raise NotImplementedError()
 
     @property
     def input_schema(self) -> dict[str, Any]:
-        return {
-            "type": "object",
-            "properties": {
-                "name": {
-                    "type": "string",
-                    "description": "User name"
-                },
-                "surname": {
-                    "type": "string",
-                    "description": "User surname"
-                },
-                "email": {
-                    "type": "string",
-                    "description": "User email"
-                },
-                "gender": {
-                    "type": "string",
-                    "description": "User gender",
-                    "enum": [
-                        "male",
-                        "female"
-                    ],
-                },
-            },
-            "required": []
-        }
+        #TODO:
+        # Provide tool params Schema:
+        # - name: str
+        # - surname: str
+        # - email: str
+        # - gender: str
+        # None of them are required (see UserClient.search_users method)
+        raise NotImplementedError()
 
     def execute(self, arguments: dict[str, Any]) -> str:
-        try:
-            return self._user_client.search_users(**arguments)
-        except Exception as e:
-            return f"Error while searching users: {str(e)}"
+        #TODO:
+        # 1. Call user_client search_users (with `**arguments`) and return its results
+        # 2. Optional: You can wrap it with `try-except` and return error as string `f"Error while searching users: {str(e)}"`
+        raise NotImplementedError()
